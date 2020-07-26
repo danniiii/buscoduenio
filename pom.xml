@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>oferteroDeBarrio</name>
-	<description>sitio para que los locales suban sus ofertas</description>
+	<name>BuscoDuenio</name>
+	<description>sitio para que las personas suban sus mascotas perdidas</description>
 
 	<properties>
 		<java.version>1.8</java.version>

@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping("mascotas-perdidas")
+@RequestMapping("")
 public class MascotaController {
 
     private MascotaRepository mascotaRepository;
@@ -177,7 +177,7 @@ public class MascotaController {
 
         mascotaRepository.save(mascotaEntity);
 
-        return "redirect:/mascotas-perdidas/ver-mascotas";
+        return "redirect:/ver-mascotas";
     }
 
     @GetMapping("/sugerencias")
@@ -200,7 +200,7 @@ public class MascotaController {
             emailService.sendSimpleMessage("danielborge.progra@gmail.com",
                                             "Mensaje de busco dueño",
                                             cuerpo);
-            return "redirect:/mascotas-perdidas";
+            return "redirect:/";
     }
 
     @GetMapping("/nosotros")
