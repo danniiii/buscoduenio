@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+
+<body>
+
+    <div th:insert="fragments/default :: nav">    </div>
+    <div class="container">
+
+        <p class="display-4 font-italic text-center"> Subi tu mascota para que podamos encontrarla entre todos</p>
+
+            <form method="post" th:action="@{/mascotas-perdidas/subir-mascota}" th:object="${mascota}">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="partido" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Partido</label>
+                        <select id="partido" class="form-control" th:onchange="filtrarSubItem(localidades,'#partido','#localidad','idPartido');" th:field="*{partido}" required="true">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option th:each="partido : ${partidos}" th:text="${partido.nombre}" th:value="${partido.id}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="localidad" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Localidad</label>
+                        <select id="localidad" class="form-control" disabled="true" th:field="*{localidad}" required="true">
+                            <option selected value="">Seleccione una opcion</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="color1">Color 1</label>
+                        <select id="color1" class="form-control" th:field="*{idColor1}">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option th:each="color : ${colores}" th:text="${color.nombre}" th:value="${color.id}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="color2">Color 2</label>
+                        <select id="color2" class="form-control" th:field="*{color2}">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option th:each="color : ${colores}" th:text="${color.nombre}" th:value="${color.id}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="mascota">Tipo de mascota</label>
+                        <select id="mascota" class="form-control" th:onchange="filtrarSubItem(razas,'#mascota','#raza','idTipoMascota');" th:field="*{idTipoMascota}" required="true">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option th:each="tipoMascota : ${tiposMascotas}" th:text="${tipoMascota.nombre}" th:value="${tipoMascota.id}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="raza">Raza</label>
+                        <select id="raza" class="form-control" disabled="true" th:field="*{raza}">
+                            <option selected value="">Seleccione una opcion</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="fecha-desaparicion">Fecha en que desapareció</label>
+                        <input type="date" class="form-control" id="fecha-desaparicion" th:field="*{fechaDesaparicion}">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="tamanio">tamaño aproximado</label>
+                        <select id="tamanio" class="form-control"  th:field="*{tamanioMascota}">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option value="CHIQUITO">CHIQUITO</option>
+                            <option value="CHICO">CHICO</option>
+                            <option value="MEDIANO">MEDIANO</option>
+                            <option value="GRANDE">GRANDE</option>
+                            <option value="GIGANTE">GIGANTE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="comentario">Comentario</label>
+                    <textarea class="form-control" id="comentario" maxlength="500" placeholder="Comentarios..." th:field="*{comentario}" required="true"></textarea>
+                    <small class="font-italic" style="color:grey;">Máximo 500 caracteres</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+            </form>
+            <!-- /FORMULARIO DE BUSQUEDA DE MASCOTAS-->
+    </div>
+
+    <div th:insert="fragments/default :: footer"></div>
+
+    <script th:inline="javascript">
+
+        var localidades = [[${localidades}]]
+        var razas = [[${razas}]]
+
+    </script>
+
+    <div th:insert="fragments/default :: script">    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+FROM postgres:9.6.17
+ENV POSTGRES_USER dani
+ENV POSTGRES_PASSWORD perrito
+ENV POSTGRES_DB mascotas
+COPY init.sql /docker-entrypoint-initdb.d/

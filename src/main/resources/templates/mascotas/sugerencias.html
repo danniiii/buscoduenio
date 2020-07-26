@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+</head>
+<body>
+<div th:insert="fragments/default :: nav">    </div>
+<div class="container">
+
+    <!-- SUGERENCIAS -->
+    <p class="display-4 font-italic text-center font-weight-bold" > ¿Algo para mejorar? Comentanos</p>
+    <form class="col-md-8 mt-3 " method="post" th:action="@{'/mascotas-perdidas/enviar-sugerencia'}"
+    th:object="${sugerencia}">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" placeholder="Nombre..." id="nombre" class="form-control" th:field="*{nombre}" required="true"/>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" placeholder="Apellido..." id="apellido" class="form-control" th:field="*{apellido}" required="true"/>
+        </div>
+        <div class="form-group">
+            <label for="mail">Mail</label>
+            <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"
+            required="true"/>
+        </div>
+        <div class="form-group">
+            <label for="comentario">Comentario</label>
+            <textarea class="form-control" id="comentario" maxlength="500" placeholder="Comentarios..." th:field="*{sugerencia}" required="true"></textarea>
+            <small class="font-italic" style="color:grey;">Máximo 500 caracteres</small>
+        </div>
+        <button type="submit" class="btn btn-md btn-primary" id="sugerencia-btn">Enviar sugerencia</button>
+    </form>
+    <!--/ SUGERENCIAS -->
+
+</div>
+
+<div th:insert="fragments/default :: footer"></div>
+
+
+<div th:insert="fragments/default :: script">    </div>
+
+
+</body>
+
+</html>
