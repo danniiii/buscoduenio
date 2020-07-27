@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true">
                 </div>
 
                 <div class="form-row">
@@ -67,7 +67,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="fecha-desaparicion">Fecha en que desapareció</label>
-                        <input type="date" class="form-control" id="fecha-desaparicion" th:field="*{fechaDesaparicion}">
+                        <input type="date" class="form-control" id="fecha-desaparicion" th:field="*{fechaDesaparicion}" required="true">
                     </div>
                     <div class="form-group col-md-5">
                         <label for="tamanio">Tamaño aproximado</label>
@@ -93,7 +93,7 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
-                            <input type="text" class="form-control" id="facebook" th:field="*{facebook}" required="true">
+                            <input type="text" class="form-control" id="facebook" th:field="*{facebook}">
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -104,8 +104,8 @@
                 </div>
                 <div class="form-group">
                     <label for="comentario">Comentario</label>
-                    <textarea class="form-control" id="comentario" maxlength="500" placeholder="Comentarios..." th:field="*{comentario}" required="true"></textarea>
-                    <small class="font-italic" style="color:grey;">Máximo 500 caracteres</small>
+                    <textarea class="form-control" id="comentario" maxlength="500" placeholder="Comentarios..." th:field="*{comentario}" ></textarea>
+                    <small class="font-italic" >Máximo 500 caracteres</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" id="enviar">Enviar</button>
