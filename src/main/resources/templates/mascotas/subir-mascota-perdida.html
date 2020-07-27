@@ -70,7 +70,7 @@
                         <input type="date" class="form-control" id="fecha-desaparicion" th:field="*{fechaDesaparicion}">
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="tamanio">tamaño aproximado</label>
+                        <label for="tamanio">Tamaño aproximado</label>
                         <select id="tamanio" class="form-control"  th:field="*{tamanioMascota}">
                             <option selected value="">Seleccione una opcion</option>
                             <option value="CHIQUITO">CHIQUITO</option>
@@ -79,6 +79,27 @@
                             <option value="GRANDE">GRANDE</option>
                             <option value="GIGANTE">GIGANTE</option>
                         </select>
+                    </div>
+                </div>
+                <hr>
+                <p class="display-5 font-italic font-weight-bold"> Contacto</p>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" class="form-control" id="telefono" th:field="*{telefono}" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" class="form-control" id="facebook" th:field="*{facebook}" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="mail">Mail</label>
+                        <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"
+                               required="true"/>
                     </div>
                 </div>
                 <div class="form-group">

@@ -47,4 +47,10 @@ public class MascotaDto {
 
     private String comentario;
 
+    private String telefono;
+
+    private String mail;
+
+    private String facebook;
+
 }

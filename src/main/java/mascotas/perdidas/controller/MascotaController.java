@@ -80,6 +80,7 @@ public class MascotaController {
            newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
            newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
            newMascotaDto.setComentario(entity.getComentario());
+           newMascotaDto.setTelefono(entity.getTel());
 
            mascotaDtoSalida.add(newMascotaDto);
        }
@@ -170,10 +171,11 @@ public class MascotaController {
             mascotaEntity.setNombreLocalidad(localidadEntity.getNombre());
         }
 
-        if (mascotaDto.getComentario()!=null)
-            mascotaEntity.setComentario(mascotaDto.getComentario());
+        mascotaEntity.setComentario(mascotaDto.getComentario());
         mascotaEntity.setContinuaPerdido("S");
-
+        mascotaEntity.setTel(mascotaDto.getTelefono());
+        mascotaEntity.setFace(mascotaDto.getFacebook());
+        mascotaEntity.setEmail(mascotaDto.getMail());
 
         mascotaRepository.save(mascotaEntity);
 

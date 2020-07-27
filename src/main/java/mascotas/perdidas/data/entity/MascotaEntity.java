@@ -71,6 +71,15 @@ public class MascotaEntity {
     @Column(name = "comentario")
     private String comentario;
 
+    @Column(name = "telefono")
+    private String tel;
+
+    @Column(name = "facebook")
+    private String face;
+
+    @Column(name = "mail")
+    private String email;
+
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_publicacion")
