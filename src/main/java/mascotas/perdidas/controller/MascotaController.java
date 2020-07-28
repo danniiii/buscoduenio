@@ -93,8 +93,27 @@ public class MascotaController {
     @GetMapping("/ver-mascotas")
     public ModelAndView mostrarTodasLasMascotas(){
         ModelAndView modelAndView = new ModelAndView("mascotas/ver-mascotas-perdidas");
-        modelAndView.addObject("mascotas", mascotaRepository.findAll());
-        return  modelAndView;
+
+        List<MascotaEntity> mascotaEntity = mascotaRepository.findAll();
+
+        List<MascotaDto> mascotaDtoSalida = new ArrayList<MascotaDto>();
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        for (MascotaEntity entity : mascotaEntity) {
+
+            MascotaDto newMascotaDto = new MascotaDto();
+            newMascotaDto.setNombre(entity.getNombre());
+            newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
+            newMascotaDto.setNombreColor1(entity.getNombreColor1());
+            newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
+            newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
+            newMascotaDto.setComentario(entity.getComentario());
+            newMascotaDto.setTelefono(entity.getTel());
+
+            mascotaDtoSalida.add(newMascotaDto);
+        }
+
+        modelAndView.addObject("mascotas", mascotaDtoSalida);
+        return modelAndView;
     }
 
     @GetMapping("/subir-mascota")
