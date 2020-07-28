@@ -80,6 +80,9 @@ public class MascotaEntity {
     @Column(name = "mail")
     private String email;
 
+    @Column(name = "url_img")
+    private String urlImagen;
+
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_publicacion")

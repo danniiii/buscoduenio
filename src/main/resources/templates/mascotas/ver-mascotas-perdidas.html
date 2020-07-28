@@ -5,13 +5,16 @@
 <body>
     <div th:insert="fragments/default :: nav">    </div>
 
-    <h1>Mascotas que continúan perdidas</h1>
+    <p class="display-4 font-italic text-center"> Mascotas que continúan perdidas</p>
 
+    <div th:if="${message}">
+        <h2 th:text="${message}"></h2>
+    </div>
 
     <div class="container">
         <div class="row">
             <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota : ${mascotas}">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" th:src="@{'/files/' + ${mascota.urlImg}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${mascota.nombre}">Card title</h5>
                     <p class="card-text">

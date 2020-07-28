@@ -5,17 +5,24 @@ import mascotas.perdidas.data.dto.SugerenciaDto;
 import mascotas.perdidas.data.entity.*;
 import mascotas.perdidas.data.repository.*;
 import mascotas.perdidas.services.EmailService;
+import mascotas.perdidas.services.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
+
 
 @Controller
 @RequestMapping("")
@@ -31,6 +38,8 @@ public class MascotaController {
     private RazaRepository razaRepository;
     @Autowired
     public EmailService emailService;
+    @Autowired
+    public UploadFileService uploadFileService;
 
     @Autowired
     public MascotaController(MascotaRepository mascotaRepository, PartidoRepository partidoRepository,
@@ -81,6 +90,7 @@ public class MascotaController {
            newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
            newMascotaDto.setComentario(entity.getComentario());
            newMascotaDto.setTelefono(entity.getTel());
+           newMascotaDto.setUrlImg(entity.getUrlImagen());
 
            mascotaDtoSalida.add(newMascotaDto);
        }
@@ -108,6 +118,7 @@ public class MascotaController {
             newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
             newMascotaDto.setComentario(entity.getComentario());
             newMascotaDto.setTelefono(entity.getTel());
+            newMascotaDto.setUrlImg(entity.getUrlImagen());
 
             mascotaDtoSalida.add(newMascotaDto);
         }
@@ -130,9 +141,15 @@ public class MascotaController {
     }
 
     @PostMapping("/subir-mascota")
-    public String guardarMascotas(@ModelAttribute MascotaDto mascotaDto, BindingResult bindingResult) throws ParseException {
+    public String guardarMascotas(@ModelAttribute MascotaDto mascotaDto,
+                                  BindingResult bindingResult,
+                                  @RequestParam("file") MultipartFile file,
+                                  RedirectAttributes attributes) throws ParseException, IOException {
 
-        if(bindingResult.hasErrors()){
+        String fileName = mascotaDto.getNombre();
+        //String fileName2 = mascotaDto.getNombre();
+
+        if(bindingResult.hasErrors()) {
             return "Error";
         }
         MascotaEntity mascotaEntity = new MascotaEntity();
@@ -143,6 +160,8 @@ public class MascotaController {
         if (mascotaDto.getFechaDesaparicion()!=null){
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
             mascotaEntity.setFechaDesaparicion(formatoDelTexto.parse(mascotaDto.getFechaDesaparicion()));
+            fileName += LocalDateTime.now().getYear() + LocalDateTime.now().getMonth().toString() + LocalDateTime.now().getDayOfMonth();
+            //fileName2 += getYear(LocalDateTime.now().toString()) + getMonth(LocalDateTime.now().toString()) + getDay(LocalDateTime.now().toString());
         }
 
         if (mascotaDto.getIdTipoMascota()!=null){
@@ -195,6 +214,11 @@ public class MascotaController {
         mascotaEntity.setTel(mascotaDto.getTelefono());
         mascotaEntity.setFace(mascotaDto.getFacebook());
         mascotaEntity.setEmail(mascotaDto.getMail());
+
+        if(! uploadFileService.saveFile(file, fileName))
+            attributes.addFlashAttribute("message", "ocurrió un error al cargar el archivo");
+        else
+            mascotaEntity.setUrlImagen(fileName + "." + file.getContentType().split("/")[1]);
 
         mascotaRepository.save(mascotaEntity);
 

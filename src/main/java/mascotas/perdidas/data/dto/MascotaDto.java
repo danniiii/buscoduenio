@@ -53,4 +53,6 @@ public class MascotaDto {
 
     private String facebook;
 
+    private String urlImg;
+
 }
