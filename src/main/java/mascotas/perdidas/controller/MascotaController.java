@@ -4,8 +4,8 @@ import mascotas.perdidas.data.dto.MascotaDto;
 import mascotas.perdidas.data.dto.SugerenciaDto;
 import mascotas.perdidas.data.entity.*;
 import mascotas.perdidas.data.repository.*;
-import mascotas.perdidas.services.EmailService;
-import mascotas.perdidas.services.UploadFileService;
+import mascotas.perdidas.service.EmailService;
+import mascotas.perdidas.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 
 @Controller
@@ -41,6 +41,8 @@ public class MascotaController {
     @Autowired
     public UploadFileService uploadFileService;
 
+
+
     @Autowired
     public MascotaController(MascotaRepository mascotaRepository, PartidoRepository partidoRepository,
                              LocalidadRepository localidadRepository, ColorRepository colorRepository,
@@ -55,7 +57,7 @@ public class MascotaController {
     }
 
     @GetMapping({"","/"})
-    public ModelAndView mostrarInicio(){
+    public ModelAndView mostrarInicio() throws ExecutionException, InterruptedException {
         ModelAndView modelAndView = new ModelAndView("mascotas/index");
         modelAndView.addObject("partidos", partidoRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre")));
         modelAndView.addObject("localidades", localidadRepository.findAll(Sort.by(Sort.Direction.ASC, "nombre")));
