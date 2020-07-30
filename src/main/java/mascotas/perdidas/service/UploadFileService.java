@@ -1,4 +1,4 @@
-package mascotas.perdidas.services;
+package mascotas.perdidas.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 @Service
 public class UploadFileService {
 
-    private String pathArchivo = ".//src//main//resources//static//files//";
+    private String pathArchivo = ".//src//main//resources//static//img//";
 
     public boolean saveFile (MultipartFile file, String fileName) throws IOException {
 

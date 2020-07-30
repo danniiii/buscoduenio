@@ -1,7 +1,4 @@
-package mascotas.perdidas.services;
-
-
-import org.springframework.stereotype.Service;
+package mascotas.perdidas.service;
 
 
 public interface EmailService {
