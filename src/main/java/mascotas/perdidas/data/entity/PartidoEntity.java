@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "partidos")
 public class PartidoEntity {
 
-    @Id
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_partido", insertable = false, updatable = false)
     private Integer id;

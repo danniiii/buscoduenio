@@ -27,10 +27,6 @@ public class MascotaRepositoryImpl {
         conditions.forEach((field,value) ->
         {
             switch (field) {
-              /*  case "partido":
-                    if(value!="")
-                        predicates.add(cb.like(root.get(field),"%"+value+"%"));
-                    break;*/
                 case "localidad":
                     if (value != null)
                         predicates.add(cb.equal(root.get(field), value ));
