@@ -5,6 +5,7 @@ import mascotas.perdidas.data.dto.SugerenciaDto;
 import mascotas.perdidas.data.entity.*;
 import mascotas.perdidas.data.repository.*;
 import mascotas.perdidas.service.EmailService;
+import mascotas.perdidas.service.FirebaseInitializer;
 import mascotas.perdidas.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -38,8 +39,11 @@ public class MascotaController {
     private RazaRepository razaRepository;
     @Autowired
     public EmailService emailService;
+    /*@Autowired
+    public UploadFileService uploadFileService;*/
+
     @Autowired
-    public UploadFileService uploadFileService;
+    FirebaseInitializer firebaseInitializer;
 
 
 
@@ -217,10 +221,11 @@ public class MascotaController {
         mascotaEntity.setFace(mascotaDto.getFacebook());
         mascotaEntity.setEmail(mascotaDto.getMail());
 
-        if(! uploadFileService.saveFile(file, fileName))
+        /*if(! storage.uploadFile(file))
             attributes.addFlashAttribute("message", "ocurrió un error al cargar el archivo");
-        else
-            mascotaEntity.setUrlImagen(fileName + "." + file.getContentType().split("/")[1]);
+        else*/
+
+        mascotaEntity.setUrlImagen(firebaseInitializer.uploadFile(file));
 
         mascotaRepository.save(mascotaEntity);
 
