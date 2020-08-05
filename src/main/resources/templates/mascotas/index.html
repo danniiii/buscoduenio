@@ -27,7 +27,7 @@
             <div class="form-row">
                 <div class="form-group col-md-5">
                     <label for="partido" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Partido</label>
-                    <select id="partido" class="form-control" th:onchange="filtrarSubItem(localidades,'#partido','#localidad','idPartido');">
+                    <select id="partido" class="form-control" th:onchange="filtrarSubItem(localidades,'#partido','#localidad','idPartido');" th:field="*{partido}">
                         <option selected value="">Seleccione una opcion</option>
                         <option th:each="partido : ${partidos}" th:text="${partido.nombre}" th:value="${partido.id}"></option>
                     </select>
@@ -75,6 +75,14 @@
             <button type="submit" class="btn btn-primary btn-lg" id="buscar">Buscar</button>
         </form>
         <!-- /FORMULARIO DE BUSQUEDA DE MASCOTAS-->
+        <hr>
+        <!-- SUBI TU REFUGIO -->
+        <p class="display-4 font-italic text-center"> Subi tu refugio </p>
+        <p class="display-5 text-justify"> Si tenes un refugio o conoces a alguien que tenga un refugio
+            podes subirlo a nuestra página para difundirlo y llegar a más personas hacliendo
+            <a th:href="@{'/refugios/subir-refugio'}">click aqui.</a>
+        </p>
+
 
     </div>
 

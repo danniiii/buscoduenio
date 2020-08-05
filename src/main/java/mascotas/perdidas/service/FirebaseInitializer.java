@@ -97,7 +97,6 @@ public class FirebaseInitializer {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(firebaseCredential);
 
-        System.out.println("bucket name====" + jsonString);
         //convert jsonString string to InputStream using Apache Commons
         return IOUtils.toInputStream(jsonString, "UTF-8");
 

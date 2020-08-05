@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+</head>
+<body>
+<div th:insert="fragments/default :: nav">    </div>
+
+
+<div class="container">
+    <p class="display-4 font-italic text-center"> Refugios </p>
+    <p class="display-5 text-justify"> Los refugios se encargan de rescatar y ayudar a aquellas mascotas
+        que se encuentran abandonadas y/o con alguna enfermedad para buscarle una nueva familia que esté
+        dispuesta a adoptar con mucho amor y responsabilidad. Muchos de ellos cubren sus gastos
+        del bolsillo propio de los fundadores o colaboradores, por eso, si te interesa ayudar de alguna manera
+        podes contactarte directamente con uno de los refugios y aportar tu granito de arena para que cada vez
+        hayan menos mascotas en la calle.
+    </p>
+
+    <table class="table table-hover ">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col" >Facebook</th>
+            <th scope="col" >Telefono</th>
+            <th scope="col" >Localidad</th>
+            <th scope="col" >Partido</th>
+            <th scope="col" >Comentario</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="refugio : ${refugios}">
+            <td th:text="${refugio.nombre}"></td>
+            <td th:text="${refugio.facebook}"></td>
+            <td th:text="${refugio.telefono}"></td>
+            <td th:text="${refugio.nombreLocalidad}"></td>
+            <td th:text="${refugio.nombrePartido}"></td>
+            <td th:text="${refugio.comentario}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:insert="fragments/default :: footer"></div>
+
+<div th:insert="fragments/default :: script">    </div>
+</body>
+</html>

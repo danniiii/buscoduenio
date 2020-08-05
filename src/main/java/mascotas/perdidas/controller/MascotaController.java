@@ -77,7 +77,8 @@ public class MascotaController {
    public ModelAndView buscarMascotasPerdidas( @ModelAttribute MascotaDto mascotaDto){
         ModelAndView modelAndView = new ModelAndView("mascotas/ver-mascotas-perdidas");
         Map<String, Integer> data = new HashMap<String, Integer>();
-        data.put("localidad", mascotaDto.getLocalidad());
+       data.put("partido", mascotaDto.getPartido());
+       data.put("localidad", mascotaDto.getLocalidad());
         data.put("color1", mascotaDto.getIdColor1());
         data.put("color2", mascotaDto.getColor2());
         data.put("idTipoMascota", mascotaDto.getIdTipoMascota());
@@ -92,10 +93,15 @@ public class MascotaController {
            newMascotaDto.setNombre(entity.getNombre());
            newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
            newMascotaDto.setNombreColor1(entity.getNombreColor1());
+           newMascotaDto.setNombreColor2(entity.getNombreColor2());
+           newMascotaDto.setNombreRaza(entity.getNombreRaza());
+           newMascotaDto.setNombrePartido(entity.getNombrePartido());
+           newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
            newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
            newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
            newMascotaDto.setComentario(entity.getComentario());
            newMascotaDto.setTelefono(entity.getTel());
+           newMascotaDto.setMail(entity.getEmail());
            newMascotaDto.setUrlImg(entity.getUrlImagen());
 
            mascotaDtoSalida.add(newMascotaDto);

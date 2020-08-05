@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+
+<body>
+
+<div th:insert="fragments/default :: nav">    </div>
+<div class="container">
+
+    <p class="display-4 font-italic text-center"> Subi la info de tu refugio</p>
+
+    <form method="post" th:action="@{/refugios/subir-refugio}" th:object="${refugio}">
+
+        <div class="form-group">
+            <label for="nombre">Nombre*</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="partido" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Partido*</label>
+                <select id="partido" class="form-control" th:onchange="filtrarSubItem(localidades,'#partido','#localidad','idPartido');" th:field="*{partido}" required="true">
+                    <option selected value="">Seleccione una opcion</option>
+                    <option th:each="partido : ${partidos}" th:text="${partido.nombre}" th:value="${partido.id}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="localidad" data-toggle="tooltip" data-placement="top" title="Localidad donde viste la mascota">Localidad*</label>
+                <select id="localidad" class="form-control" disabled="true" th:field="*{localidad}" required="true">
+                    <option selected value="">Seleccione una opcion</option>
+                </select>
+            </div>
+        </div>
+
+        <hr>
+        <p class="display-5 font-italic font-weight-bold"> Contacto</p>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <div class="form-group">
+                    <label for="telefono">Telefono*</label>
+                    <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" required="true">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <input type="text" class="form-control" id="facebook" th:field="*{facebook}">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="mail">Mail</label>
+                <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="comentario">Comentario</label>
+            <textarea class="form-control" id="comentario" maxlength="300" placeholder="Comentarios..." th:field="*{comentario}" ></textarea>
+            <small class="font-italic" >Máximo 300 caracteres</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+    </form>
+    <!-- /FORMULARIO DE BUSQUEDA DE MASCOTAS-->
+</div>
+
+<div th:insert="fragments/default :: footer"></div>
+
+    <script th:inline="javascript">
+
+        var localidades = [[${localidades}]]
+     </script>
+
+<div th:insert="fragments/default :: script">    </div>
+</body>
+</html>

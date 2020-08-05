@@ -12,20 +12,20 @@
             <form method="post" th:action="@{/subir-mascota}" th:object="${mascota}" enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombre*</label>
                     <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="partido" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Partido</label>
+                        <label for="partido" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Partido*</label>
                         <select id="partido" class="form-control" th:onchange="filtrarSubItem(localidades,'#partido','#localidad','idPartido');" th:field="*{partido}" required="true">
                             <option selected value="">Seleccione una opcion</option>
                             <option th:each="partido : ${partidos}" th:text="${partido.nombre}" th:value="${partido.id}"></option>
                         </select>
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="localidad" data-toggle="tooltip" data-placement="top" title="Partido donde viste la mascota">Localidad</label>
+                        <label for="localidad" data-toggle="tooltip" data-placement="top" title="Localidad donde viste la mascota">Localidad*</label>
                         <select id="localidad" class="form-control" disabled="true" th:field="*{localidad}" required="true">
                             <option selected value="">Seleccione una opcion</option>
                         </select>
@@ -51,7 +51,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="mascota">Tipo de mascota</label>
+                        <label for="mascota">Tipo de mascota*</label>
                         <select id="mascota" class="form-control" th:onchange="filtrarSubItem(razas,'#mascota','#raza','idTipoMascota');" th:field="*{idTipoMascota}" required="true">
                             <option selected value="">Seleccione una opcion</option>
                             <option th:each="tipoMascota : ${tiposMascotas}" th:text="${tipoMascota.nombre}" th:value="${tipoMascota.id}"></option>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="fecha-desaparicion">Fecha en que desapareció</label>
+                        <label for="fecha-desaparicion">Fecha en que desapareció*</label>
                         <input type="date" class="form-control" id="fecha-desaparicion" th:field="*{fechaDesaparicion}" required="true">
                     </div>
                     <div class="form-group col-md-5">
@@ -86,8 +86,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <div class="form-group">
-                            <label for="telefono">Telefono</label>
-                            <input type="text" class="form-control" id="telefono" th:field="*{telefono}" required="true">
+                            <label for="telefono">Telefono*</label>
+                            <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" required="true">
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -97,20 +97,20 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="mail">Mail</label>
+                        <label for="mail">Mail*</label>
                         <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"
                                required="true"/>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group col-md-4">
-                    <label for="file">Subi la foto de tu mascota</label>
+                    <label for="file">Subi la foto de tu mascota*</label>
                     <input type="file"  id="file" class="form-control" required="true" name="file"/>
                 </div>
                 <div class="form-group">
                     <label for="comentario">Comentario</label>
-                    <textarea class="form-control" id="comentario" maxlength="500" placeholder="Comentarios..." th:field="*{comentario}" ></textarea>
-                    <small class="font-italic" >Máximo 500 caracteres</small>
+                    <textarea class="form-control" id="comentario" maxlength="300" placeholder="Comentarios..." th:field="*{comentario}" ></textarea>
+                    <small class="font-italic" >Máximo 300 caracteres</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" id="enviar">Enviar</button>
