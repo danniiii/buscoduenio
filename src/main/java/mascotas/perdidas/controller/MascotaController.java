@@ -96,6 +96,7 @@ public class MascotaController {
            newMascotaDto.setComentario(entity.getComentario());
            newMascotaDto.setTelefono(entity.getTel());
            newMascotaDto.setMail(entity.getEmail());
+           newMascotaDto.setFacebook(entity.getFace());
            newMascotaDto.setUrlImg(entity.getUrlImagen());
            newMascotaDto.setId(entity.getId());
            newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
@@ -133,6 +134,7 @@ public class MascotaController {
             newMascotaDto.setComentario(entity.getComentario());
             newMascotaDto.setTelefono(entity.getTel());
             newMascotaDto.setMail(entity.getEmail());
+            newMascotaDto.setFacebook(entity.getFace());
             newMascotaDto.setUrlImg(entity.getUrlImagen());
             newMascotaDto.setId(entity.getId());
             newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
@@ -165,7 +167,6 @@ public class MascotaController {
                                   RedirectAttributes attributes) throws ParseException, IOException {
 
         String fileName = mascotaDto.getNombre();
-        //String fileName2 = mascotaDto.getNombre();
 
         if(bindingResult.hasErrors()) {
             return new ModelAndView("error");
@@ -179,7 +180,6 @@ public class MascotaController {
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
             mascotaEntity.setFechaDesaparicion(formatoDelTexto.parse(mascotaDto.getFechaDesaparicion()));
             fileName += LocalDateTime.now().getYear() + LocalDateTime.now().getMonth().toString() + LocalDateTime.now().getDayOfMonth();
-            //fileName2 += getYear(LocalDateTime.now().toString()) + getMonth(LocalDateTime.now().toString()) + getDay(LocalDateTime.now().toString());
         }
 
         if (mascotaDto.getIdTipoMascota()!=null){
@@ -200,7 +200,7 @@ public class MascotaController {
             mascotaEntity.setColor2(mascotaDto.getColor2());
             Optional<ColorEntity> maybeColorEntity2 = colorRepository.findById(mascotaDto.getColor2());
             ColorEntity colorEntity2 = maybeColorEntity2.get();
-            mascotaEntity.setNombreColor1(colorEntity2.getNombre());
+            mascotaEntity.setNombreColor2(colorEntity2.getNombre());
         }
 
         if (mascotaDto.getTamanioMascota()!=null)
@@ -355,8 +355,10 @@ public class MascotaController {
             mascotaEntity.setNombreRaza(razaEntity.getNombre());
         }
 
-        mascotaEntity.setFace(mascotaDto.getFacebook());
-        mascotaEntity.setEmail(mascotaDto.getMail());
+        if (mascotaDto.getFacebook()!=null)
+            mascotaEntity.setFace(mascotaDto.getFacebook());
+        if (mascotaDto.getMail()!=null)
+            mascotaEntity.setEmail(mascotaDto.getMail());
 
         mascotaRepository.save(mascotaEntity);
 

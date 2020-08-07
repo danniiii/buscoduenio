@@ -29,9 +29,8 @@
                     <button class="btn btn-primary" data-toggle="modal" th:data-target="'#ver-publicacion' + ${status.index}">Ver publicación</button>
                     <br>
                     <br>
-                    <button class="btn btn-lg m-2 btn-info" data-toggle="collapse" data-target="#editar" aria-expanded="false" aria-controls="editar" >Editar </button>
-                    <button class="btn btn-lg btn-success" data-toggle="collapse" data-target="#eliminar" aria-expanded="false" aria-controls="eliminar" >Me encontraron</button>
-                    <div id="editar" class="collapse">
+                    <button class="btn btn-lg m-2 btn-info" data-toggle="collapse" th:data-target="'#editar' + ${status.index}" aria-expanded="false" th:aria-controls="'editar' + ${status.index}" >Editar </button>
+                    <div th:id="'editar' + ${status.index}" class="collapse">
                         <form method="get" th:action="@{'/editar-mascota/' + ${mascota.id}}">
                             <div class="form-group">
                                 <label for="codigo"><b><em>Para EDITAR ingrese el código de publicación:</em></b></label>
@@ -40,7 +39,9 @@
                             <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
                         </form>
                     </div>
-                    <div id="eliminar" class="collapse">
+                    <br>
+                    <button class="btn btn-lg btn-success" data-toggle="collapse" th:data-target="'#eliminar' + ${status.index}" aria-expanded="false" th:aria-controls="'eliminar' + ${status.index}" >Me encontraron</button>
+                    <div th:id="'eliminar' + ${status.index}" class="collapse">
                         <form method="post" th:action="@{'/eliminar-mascota/' + ${mascota.id}}">
                             <div class="form-group">
                                 <label for="codigo-elimina"><b><em>Si tu mascota apareció por favor ingresa el código de publicación para poder registrarlo:</em></b></label>
