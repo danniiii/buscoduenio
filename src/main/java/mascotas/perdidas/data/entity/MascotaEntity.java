@@ -91,4 +91,7 @@ public class MascotaEntity {
     @Column(name = "continua_perdido")
     private String continuaPerdido;
 
+    @Column(name = "token_publicacion")
+    private String token;
+
 }

@@ -15,6 +15,8 @@ import java.util.Date;
 
 public class MascotaDto {
 
+    private Integer id;
+
     private String nombre;
 
     private String fechaDesaparicion;
@@ -54,5 +56,9 @@ public class MascotaDto {
     private String facebook;
 
     private String urlImg;
+
+    private String codigo;
+
+    private String continuaPerdido;
 
 }

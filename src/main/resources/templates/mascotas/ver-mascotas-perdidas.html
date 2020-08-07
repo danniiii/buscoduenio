@@ -13,19 +13,42 @@
 
     <div class="container">
         <div class="row">
-            <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}">
+            <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}"
+            th:if="${mascota.continuaPerdido == 'S'}">
                 <img class="card-img-top img-fluid rounded" th:src="@{'https://storage.cloud.google.com/primeroproyecto-65f07.appspot.com/' + ${mascota.urlImg}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${mascota.nombre}"></h5>
+                    <u><h5 class="card-title text-center text-uppercase" th:text="${mascota.nombre}"></h5></u>
                     <p class="card-text">
                         <b>Mascota: </b><span th:text="${mascota.nombreTipoMascota}"></span><br>
-                        <b>Fecha de desaparición: </b><span th:text="${mascota.fechaDesaparicion}"></span><br>
+                        <b>Desaparición: </b><span th:text="${mascota.fechaDesaparicion}"></span><br>
                         <b>Partido: </b><span th:text="${mascota.nombrePartido}"></span><br>
                         <b>Localidad: </b><span th:text="${mascota.nombreLocalidad}"></span><br>
                         <b>Tamaño: </b><span th:text="${mascota.tamanioMascota}"></span><br>
                         <b>Telefono:</b><span th:text="${mascota.telefono}"></span><br>
                     </p>
                     <button class="btn btn-primary" data-toggle="modal" th:data-target="'#ver-publicacion' + ${status.index}">Ver publicación</button>
+                    <br>
+                    <br>
+                    <button class="btn btn-lg m-2 btn-info" data-toggle="collapse" data-target="#editar" aria-expanded="false" aria-controls="editar" >Editar </button>
+                    <button class="btn btn-lg btn-success" data-toggle="collapse" data-target="#eliminar" aria-expanded="false" aria-controls="eliminar" >Me encontraron</button>
+                    <div id="editar" class="collapse">
+                        <form method="get" th:action="@{'/editar-mascota/' + ${mascota.id}}">
+                            <div class="form-group">
+                                <label for="codigo"><b><em>Para EDITAR ingrese el código de publicación:</em></b></label>
+                                <input type="text" name="codigo" id="codigo" required="true"/>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                    <div id="eliminar" class="collapse">
+                        <form method="post" th:action="@{'/eliminar-mascota/' + ${mascota.id}}">
+                            <div class="form-group">
+                                <label for="codigo-elimina"><b><em>Si tu mascota apareció por favor ingresa el código de publicación para poder registrarlo:</em></b></label>
+                                <input type="text" name="codigo-elimina" id="codigo-elimina" required="true"/>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+                        </form>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade" th:id="'ver-publicacion' + ${status.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -42,7 +65,7 @@
                                     <div class="card-body">
                                         <p class="card-text">
                                             <b>Mascota: </b><span th:text="${mascota.nombreTipoMascota}"></span><br>
-                                            <b>Fecha de desaparición: </b><span th:text="${mascota.fechaDesaparicion}"></span><br>
+                                            <b>Desaparición: </b><span th:text="${mascota.fechaDesaparicion}"></span><br>
                                             <b>Color1: </b><span th:text="${mascota.nombreColor1}"></span><br>
                                             <b>Color2: </b><span th:text="${mascota.nombreColor2}"></span><br>
                                             <b>Raza: </b><span th:text="${mascota.nombreRaza}"></span><br>
@@ -52,6 +75,7 @@
                                             <b>Mail: </b><span th:text="${mascota.mail}"></span><br>
                                             <b>Telefono:</b><span th:text="${mascota.telefono}"></span><br>
                                             <b>Facebook: </b><span th:text="${mascota.facebook}"></span><br>
+                                            <b>Comentario: </b><span th:text="${mascota.comentario}"></span><br>
                                         </p>
                                     </div>
                                 </div>

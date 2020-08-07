@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+
+<body>
+
+<div th:insert="fragments/default :: nav">    </div>
+<div class="container">
+
+    <p class="display-4 font-italic text-center"> Modifica sólo los campos que necesites cambiar</p>
+
+    <form method="post" th:action="@{'/editar-mascota/' + ${mascota.id}}" th:object="${mascota}">
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}"/>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="color1">Color 1</label>
+                <select id="color1" class="form-control" th:field="*{idColor1}">
+                    <option selected value="">Seleccione una opcion</option>
+                    <option th:each="color : ${colores}" th:text="${color.nombre}" th:value="${color.id}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="color2">Color 2</label>
+                <select id="color2" class="form-control" th:field="*{color2}">
+                    <option selected value="">Seleccione una opcion</option>
+                    <option th:each="color : ${colores}" th:text="${color.nombre}" th:value="${color.id}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="mascota">Tipo de mascota</label>
+                <select id="mascota" class="form-control" th:onchange="filtrarSubItem(razas,'#mascota','#raza','idTipoMascota');" th:field="*{idTipoMascota}">
+                    <option selected value="">Seleccione una opcion</option>
+                    <option th:each="tipoMascota : ${tiposMascotas}" th:text="${tipoMascota.nombre}" th:value="${tipoMascota.id}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="raza">Raza</label>
+                <select id="raza" class="form-control" disabled="true" th:field="*{raza}">
+                    <option selected value="">Seleccione una opcion</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <p class="display-5 font-italic font-weight-bold"> Contacto</p>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" />
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <input type="text" class="form-control" id="facebook" th:field="*{facebook}"/>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="mail">Mail</label>
+                <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" id="enviar">Editar</button>
+    </form>
+    <!-- /FORMULARIO DE BUSQUEDA DE MASCOTAS-->
+</div>
+
+<div th:insert="fragments/default :: footer"></div>
+
+<script th:inline="javascript">
+
+        var razas = [[${razas}]]
+
+    </script>
+
+<div th:insert="fragments/default :: script">    </div>
+</body>
+</html>
