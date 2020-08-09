@@ -23,3 +23,27 @@ font-family: 'Lobster', cursive;
     text-decoration:none;
     color: blue;
 }
+
+#mascotas-index-img{
+    height: 90vh;
+    min-height: 300px;
+    width: 100%;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+  }
+
+#nosotros-img{
+
+    height: 75vh;
+    min-height: 300px;
+    width: 80%;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

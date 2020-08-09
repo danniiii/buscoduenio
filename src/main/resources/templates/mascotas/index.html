@@ -5,22 +5,22 @@
 </head>
 <body>
     <div th:insert="fragments/default :: nav">    </div>
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-12 col-md-5 mx-2 px-2">
-                <img class="img-fluid" th:src="@{/img/mascotas.jpg}" alt="mascotas">
+    <div class="container-fluid">
+            <div class="row animate__animated animate__fadeInDown">
+                <img class="img-fluid" th:src="@{/img/mascotas.jpeg}" alt="mascotas" id="mascotas-index-img">
             </div>
-            <div class="col-12 col-md-5">
-                <p class="display-4 font-italic text-center"> Busco a mi dueño</p>
-                <p class="display-5 text-justify"> Busco a mi dueño es un sitio para todos aquellos que
-                    estamos sufriendo de un gran flagelo por la pérdida un ser querido como es alguna de
-                    nuestra mascota, te proponemos subir la foto de tu mascota para que podamos encontrarla
-                    entre todos.
+    </div>
+    <br>
+    <div class="container">
+            <div class="col-12" >
+                <p class="display-4 font-italic text-center"> ¿Perdiste tu mascota? Publicala</p>
+                <p class="display-5 text-justify"> <b>Busco a  mi dueño</b> es un sitio que reune información acerca
+                    de mascotas extraviadas. Podes subir la foto de tu mascota para buscarla
+                    entre todos haciendo <a th:href="@{'/subir-mascota'}">click aqui.</a>
                 </p>
             </div>
-        </div>
         <hr>
-        <p class="display-4 font-italic text-center"> Busca tu mascota </p>
+        <p class="display-4 font-italic text-center"> Busca las mascotas publicadas </p>
 
         <!-- FORMULARIO DE BUSQUEDA DE MASCOTAS-->
         <form method="post" th:action="@{/ver-mascotas}" th:object="${mascota}">
@@ -83,7 +83,6 @@
             <a th:href="@{'/refugios/subir-refugio'}">click aqui.</a>
         </p>
 
-
     </div>
 
     <div th:insert="fragments/default :: footer"></div>
@@ -99,13 +98,14 @@
     <div th:insert="fragments/default :: script">    </div>
 </body>
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- The core Firebase JS SDK is always required and must be listed first
 <script src="/__/firebase/7.17.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+ TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries
 <script src="/__/firebase/7.17.1/firebase-analytics.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
+ Initialize Firebase
+<script src="/__/firebase/init.js"></script>-->
+
 </html>
