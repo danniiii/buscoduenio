@@ -94,4 +94,7 @@ public class MascotaEntity {
     @Column(name = "token_publicacion")
     private String token;
 
+    @Column(name = "genero")
+    private String genero;
+
 }

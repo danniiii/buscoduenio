@@ -50,19 +50,28 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-4">
                         <label for="mascota">Tipo de mascota*</label>
                         <select id="mascota" class="form-control" th:onchange="filtrarSubItem(razas,'#mascota','#raza','idTipoMascota');" th:field="*{idTipoMascota}" required="true">
                             <option selected value="">Seleccione una opcion</option>
                             <option th:each="tipoMascota : ${tiposMascotas}" th:text="${tipoMascota.nombre}" th:value="${tipoMascota.id}"></option>
                         </select>
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-4">
                         <label for="raza">Raza</label>
                         <select id="raza" class="form-control" disabled="true" th:field="*{raza}">
                             <option selected value="">Seleccione una opcion</option>
                         </select>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="genero">Género</label>
+                        <select id="genero" class="form-control" th:field="*{genero}">
+                            <option selected value="">Seleccione una opcion</option>
+                            <option value="MACHO">MACHO</option>
+                            <option value="HEMBRA">HEMBRA</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
@@ -106,6 +115,7 @@
                 <div class="form-group col-md-4">
                     <label for="file">Subi la foto de tu mascota*</label>
                     <input type="file"  id="file" class="form-control" required="true" name="file"/>
+                    <small class="font-italic" >Máximo 4MB</small>
                 </div>
                 <div class="form-group">
                     <label for="comentario">Comentario</label>

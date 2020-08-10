@@ -3,8 +3,8 @@
 
 .nav-item{
    /* font-family: 'Chilanka', cursive;*/
+       font-size: 1.5rem;
    font-family: 'Vollkorn', serif;
-    font-size: 2rem;
 }
 
 .nav-link:hover{

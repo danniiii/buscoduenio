@@ -83,25 +83,29 @@ public class MascotaController {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
        for (MascotaEntity entity : mascotaEntity) {
 
-           MascotaDto newMascotaDto = new MascotaDto();
-           newMascotaDto.setNombre(entity.getNombre());
-           newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
-           newMascotaDto.setNombreColor1(entity.getNombreColor1());
-           newMascotaDto.setNombreColor2(entity.getNombreColor2());
-           newMascotaDto.setNombreRaza(entity.getNombreRaza());
-           newMascotaDto.setNombrePartido(entity.getNombrePartido());
-           newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
-           newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
-           newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
-           newMascotaDto.setComentario(entity.getComentario());
-           newMascotaDto.setTelefono(entity.getTel());
-           newMascotaDto.setMail(entity.getEmail());
-           newMascotaDto.setFacebook(entity.getFace());
-           newMascotaDto.setUrlImg(entity.getUrlImagen());
-           newMascotaDto.setId(entity.getId());
-           newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
+           if (entity.getContinuaPerdido().equals("S") == true) {
 
-           mascotaDtoSalida.add(newMascotaDto);
+              MascotaDto newMascotaDto = new MascotaDto();
+              newMascotaDto.setNombre(entity.getNombre());
+              newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
+              newMascotaDto.setNombreColor1(entity.getNombreColor1());
+              newMascotaDto.setNombreColor2(entity.getNombreColor2());
+              newMascotaDto.setNombreRaza(entity.getNombreRaza());
+              newMascotaDto.setNombrePartido(entity.getNombrePartido());
+              newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
+              newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
+              newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
+              newMascotaDto.setComentario(entity.getComentario());
+              newMascotaDto.setTelefono(entity.getTel());
+              newMascotaDto.setMail(entity.getEmail());
+              newMascotaDto.setFacebook(entity.getFace());
+              newMascotaDto.setUrlImg(entity.getUrlImagen());
+              newMascotaDto.setId(entity.getId());
+              newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
+              newMascotaDto.setGenero(entity.getGenero());
+
+              mascotaDtoSalida.add(newMascotaDto);
+          }
        }
 
         modelAndView.addObject("mascotas", mascotaDtoSalida);
@@ -120,26 +124,29 @@ public class MascotaController {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
         for (MascotaEntity entity : mascotaEntity) {
 
-            MascotaDto newMascotaDto = new MascotaDto();
+            if (entity.getContinuaPerdido().equals("S") == true) {
+                MascotaDto newMascotaDto = new MascotaDto();
 
-            newMascotaDto.setNombre(entity.getNombre());
-            newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
-            newMascotaDto.setNombreColor1(entity.getNombreColor1());
-            newMascotaDto.setNombreColor2(entity.getNombreColor2());
-            newMascotaDto.setNombreRaza(entity.getNombreRaza());
-            newMascotaDto.setNombrePartido(entity.getNombrePartido());
-            newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
-            newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
-            newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
-            newMascotaDto.setComentario(entity.getComentario());
-            newMascotaDto.setTelefono(entity.getTel());
-            newMascotaDto.setMail(entity.getEmail());
-            newMascotaDto.setFacebook(entity.getFace());
-            newMascotaDto.setUrlImg(entity.getUrlImagen());
-            newMascotaDto.setId(entity.getId());
-            newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
+                newMascotaDto.setNombre(entity.getNombre());
+                newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
+                newMascotaDto.setNombreColor1(entity.getNombreColor1());
+                newMascotaDto.setNombreColor2(entity.getNombreColor2());
+                newMascotaDto.setNombreRaza(entity.getNombreRaza());
+                newMascotaDto.setNombrePartido(entity.getNombrePartido());
+                newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
+                newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
+                newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
+                newMascotaDto.setComentario(entity.getComentario());
+                newMascotaDto.setTelefono(entity.getTel());
+                newMascotaDto.setMail(entity.getEmail());
+                newMascotaDto.setFacebook(entity.getFace());
+                newMascotaDto.setUrlImg(entity.getUrlImagen());
+                newMascotaDto.setId(entity.getId());
+                newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
+                newMascotaDto.setGenero(entity.getGenero());
 
-            mascotaDtoSalida.add(newMascotaDto);
+                mascotaDtoSalida.add(newMascotaDto);
+            }
         }
 
         modelAndView.addObject("mascotas", mascotaDtoSalida);
@@ -233,7 +240,7 @@ public class MascotaController {
         mascotaEntity.setFace(mascotaDto.getFacebook());
         mascotaEntity.setEmail(mascotaDto.getMail());
         mascotaEntity.setToken(generarToken());
-
+        mascotaEntity.setGenero(mascotaDto.getGenero());
 
         mascotaEntity.setUrlImagen(firebaseInitializer.uploadFile(file));
 
@@ -290,8 +297,12 @@ public class MascotaController {
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
 
 
-        if(codigo.equals(mascotaEntity.getToken()) == false)
-             return new ModelAndView("error");
+        if(codigo.equals(mascotaEntity.getToken()) == false){
+            ModelAndView mav =  new ModelAndView("error");
+            mav.addObject("mensaje", "el código ingresado es incorrecto");
+            return mav;
+
+        }
 
         ModelAndView modelAndView = new ModelAndView("mascotas/editar-mascota");
 
@@ -310,13 +321,13 @@ public class MascotaController {
     }
 
     @PostMapping("/editar-mascota/{id_mascota}")
-    public String mostrarFormularioEditarMascota(@PathVariable("id_mascota") Integer idMascota,
+    public ModelAndView mostrarFormularioEditarMascota(@PathVariable("id_mascota") Integer idMascota,
             @ModelAttribute MascotaDto mascotaDto){
 
         Optional<MascotaEntity> maybeMascotaEntity = mascotaRepository.findById(idMascota);
 
         if(!maybeMascotaEntity.isPresent()){
-            return "error";
+            return new ModelAndView("error");
         }
 
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
@@ -362,33 +373,35 @@ public class MascotaController {
 
         mascotaRepository.save(mascotaEntity);
 
-        return "redirect:/ver-mascotas";
+        return new ModelAndView("mascotas/ver-mascota-perdida");
 
     }
 
     @PostMapping("/eliminar-mascota/{id_mascota}")
-    public String eliminarMascota(@PathVariable("id_mascota") Integer idMascota,
+    public ModelAndView eliminarMascota(@PathVariable("id_mascota") Integer idMascota,
                                                        @ModelAttribute ("codigo-elimina") String codigo){
 
         Optional<MascotaEntity> maybeMascotaEntity =  mascotaRepository.findById(idMascota);
 
         if(!maybeMascotaEntity.isPresent()){
 
-            return "error";
+            return new ModelAndView("error");
         }
 
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
 
 
-        if(codigo.equals(mascotaEntity.getToken()) == false)
-            return "error";
+        if(codigo.equals(mascotaEntity.getToken()) == false){
+            ModelAndView mav =  new ModelAndView("error");
+            mav.addObject("mensaje", "el código ingresado es incorrecto");
+            return mav;
+        }
 
         mascotaEntity.setContinuaPerdido("N");
         mascotaRepository.save(mascotaEntity);
 
-        return "redirect:/ver-mascotas";
+        return new ModelAndView("mascotas/ver-mascotas-perdidas");
 
     }
-
 
 }

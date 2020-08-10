@@ -61,4 +61,6 @@ public class MascotaDto {
 
     private String continuaPerdido;
 
+    private String genero;
+
 }

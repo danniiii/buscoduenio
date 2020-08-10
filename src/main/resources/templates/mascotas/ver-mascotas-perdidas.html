@@ -7,12 +7,12 @@
 
     <p class="display-4 font-italic text-center"> Mascotas que continúan perdidas</p>
 
-    <div th:if="${message}">
-        <h2 th:text="${message}"></h2>
-    </div>
 
     <div class="container">
         <div class="row">
+            <div th:if="${#lists.isEmpty(mascotas)}">
+                <h5><i> No se encontraron resultados que coincidan con los criterios de la búsqueda</i></h5>
+            </div>
             <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}"
             th:if="${mascota.continuaPerdido == 'S'}">
                 <img class="card-img-top img-fluid rounded" th:src="@{'https://storage.cloud.google.com/primeroproyecto-65f07.appspot.com/' + ${mascota.urlImg}}" alt="Card image cap">
@@ -70,9 +70,10 @@
                                             <b>Color1: </b><span th:text="${mascota.nombreColor1}"></span><br>
                                             <b>Color2: </b><span th:text="${mascota.nombreColor2}"></span><br>
                                             <b>Raza: </b><span th:text="${mascota.nombreRaza}"></span><br>
+                                            <b>Género: </b><span th:text="${mascota.genero}"></span><br>
+                                            <b>Tamaño: </b><span th:text="${mascota.tamanioMascota}"></span><br>
                                             <b>Partido: </b><span th:text="${mascota.nombrePartido}"></span><br>
                                             <b>Localidad: </b><span th:text="${mascota.nombreLocalidad}"></span><br>
-                                            <b>Tamaño: </b><span th:text="${mascota.tamanioMascota}"></span><br>
                                             <b>Mail: </b><span th:text="${mascota.mail}"></span><br>
                                             <b>Telefono:</b><span th:text="${mascota.telefono}"></span><br>
                                             <b>Facebook: </b><span th:text="${mascota.facebook}"></span><br>
