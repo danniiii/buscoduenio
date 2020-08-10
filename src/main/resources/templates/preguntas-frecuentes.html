@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/default :: head">
+</head>
+<body>
+<div th:insert="fragments/default :: nav">    </div>
+
+
+<div class="container">
+    <p class="display-4 font-italic text-center"> Preguntas Frecuentes</p>
+    <p class="display-5 text-justify"> Si tenés alguna otra consulta que no puedas responder en esta sección
+        podes hablarnos por las redes sociales.
+    </p>
+    <br>
+    <br>
+    <div id="accordion">
+        <!-- PREGUNTA 1 -->
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#pregunta1">
+                    <p class="display-5 text-justify"><b> 1.-¿Para que sirve el código de la publicación?</b></p>
+                </a>
+            </div>
+            <div id="pregunta1" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    El código de la publicación sirve para que puedas editarla o avisarnos cuando ya encontraste a tu mascota.
+                    De ésta forma podemos llevar un registro estadístico de las mascotas encontradas.
+                </div>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 2 -->
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#pregunta2">
+                    <p><b> 2.-¿Que hago si pierdo el código de la publicación?</b></p>
+                </a>
+            </div>
+            <div id="pregunta2" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Podés enviarnos un mensaje privado a nuestras redes pidiéndonos el código nuevamente.
+                </div>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 3 -->
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#pregunta3">
+                    <p class="display-5 text-justify"><b> 3.-Tengo un refugio ¿puedo publicarlo?</b></p>
+                </a>
+            </div>
+            <div id="pregunta3" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Si, podés publicar tu refugio sin ningún costo para que pueda ser visto y difundido. De esa manera llegar a más personas.
+                </div>
+            </div>
+        </div>
+
+        <!-- PREGUNTA 4 -->
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#pregunta4">
+                    <p class="display-5 text-justify"><b> 4.-¿Tiene algún costo publicar?</b></p>
+                </a>
+            </div>
+            <div id="pregunta4" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    No, la publicación es gratuita ya que nuestro objetivo principal es darte una mano para que puedas encontrar a tu mascota extraviada.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div th:insert="fragments/default :: footer"></div>
+
+<div th:insert="fragments/default :: script">    </div>
+</body>
+</html>

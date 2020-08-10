@@ -404,4 +404,10 @@ public class MascotaController {
 
     }
 
+    @GetMapping("/preguntas-frecuentes")
+    public ModelAndView preguntasFrecuentes(){
+
+        ModelAndView modelAndView = new ModelAndView("preguntas-frecuentes");
+        return modelAndView;
+    }
 }
