@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 public class MascotaRepositoryImpl {
 
     @PersistenceContext
@@ -71,6 +72,7 @@ public class MascotaRepositoryImpl {
         });
 
         query.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
-        return entityManager.createQuery(query).getResultList();
+        return entityManager.createQuery(query)
+                .getResultList();
     }
 }

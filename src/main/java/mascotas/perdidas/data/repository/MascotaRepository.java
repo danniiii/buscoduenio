@@ -10,4 +10,5 @@ import java.util.Map;
 @Repository
 public interface MascotaRepository extends JpaRepository <MascotaEntity, Integer> {
     public List<MascotaEntity> getData(Map<String, Integer> conditions);
+
 }

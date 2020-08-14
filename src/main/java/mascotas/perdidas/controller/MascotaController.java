@@ -26,6 +26,8 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("")
 public class MascotaController {
 
+    private static final int CANTIDAD_ELEMENTOS_POR_PAGINA = 9;
+
     private MascotaRepository mascotaRepository;
 
     @Autowired
@@ -83,7 +85,7 @@ public class MascotaController {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
        for (MascotaEntity entity : mascotaEntity) {
 
-           if (entity.getContinuaPerdido().equals("S") == true) {
+           if (entity.getContinuaPerdido().equals("S")) {
 
               MascotaDto newMascotaDto = new MascotaDto();
               newMascotaDto.setNombre(entity.getNombre());
@@ -124,7 +126,7 @@ public class MascotaController {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
         for (MascotaEntity entity : mascotaEntity) {
 
-            if (entity.getContinuaPerdido().equals("S") == true) {
+            if (entity.getContinuaPerdido().equals("S")) {
                 MascotaDto newMascotaDto = new MascotaDto();
 
                 newMascotaDto.setNombre(entity.getNombre());
@@ -391,7 +393,7 @@ public class MascotaController {
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
 
 
-        if(codigo.equals(mascotaEntity.getToken()) == false){
+        if(!codigo.equals(mascotaEntity.getToken())){
             ModelAndView mav =  new ModelAndView("error");
             mav.addObject("mensaje", "el código ingresado es incorrecto");
             return mav;

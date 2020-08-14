@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
     <meta name="google-site-verification" content="Gk3vrCEYD3I9y2L1beHhNRZ_pVlvL41OoKCzJUlHK4g" />
+    <link rel="icon" href="img/logo2.jpeg" type="image/jpeg">
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark" th:fragment="nav">
             <!--ICONO DE INICIO-->
             <a class="navbar-brand nav-link" th:href="@{'/'}">
-                <img style="width:4em; height:4em" th:src="@{/img/logo.jpeg}" class="img-fluid rounded-circle">
+                <img style="width:4em; height:4em" th:src="@{/img/logo2.jpeg}" class="img-fluid rounded-circle">
             </a>
             <!--/ICONO DE INICIO-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,10 +35,10 @@
                         <a class="nav-link text-white" th:href="@{'/refugios'}">Refugios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" th:href="@{'/nosotros'}">Nosotros</a>
+                        <a class="nav-link text-white" th:href="@{'/ver-mascotas'}">Ver mascotas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" th:href="@{'/ver-mascotas'}">Ver mascotas</a>
+                        <a class="nav-link text-white" th:href="@{'/nosotros'}">Nosotros</a>
                     </li>
                 </ul>
             </div>

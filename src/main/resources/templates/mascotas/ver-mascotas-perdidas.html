@@ -7,14 +7,18 @@
 
     <p class="display-4 font-italic text-center"> Mascotas que continúan perdidas</p>
 
+    <a class="btn btn-lg btn-primary" href="#" id="myBtn"> <i class="fa fa-chevron-up" aria-hidden="true"></i> </a>
+
 
     <div class="container">
+        <div th:if="${#lists.isEmpty(mascotas)}">
+            <h5><i> No se encontraron resultados que coincidan con los criterios de la búsqueda</i></h5>
+        </div>
+        <h4><i>Se encontraron <span th:text="${#lists.size(mascotas)}"></span> resultados</i></h4>
+        <br>
         <div class="row">
-            <div th:if="${#lists.isEmpty(mascotas)}">
-                <h5><i> No se encontraron resultados que coincidan con los criterios de la búsqueda</i></h5>
-            </div>
-            <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}"
-            th:if="${mascota.continuaPerdido == 'S'}">
+           <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}" th:if="${mascota.continuaPerdido == 'S'}">
+
                 <img class="card-img-top img-fluid rounded" th:src="@{'https://storage.cloud.google.com/primeroproyecto-65f07.appspot.com/' + ${mascota.urlImg}}" alt="Card image cap">
                 <div class="card-body">
                     <u><h5 class="card-title text-center text-uppercase" th:text="${mascota.nombre}"></h5></u>
@@ -85,9 +89,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
+           </div>
         </div>
+
     </div>
+
+
+    <script th:inline="javascript">
+
+        var cards = [[${mascotas}]]
+
+    </script>
+
 
     <div th:insert="fragments/default :: footer"></div>
 
