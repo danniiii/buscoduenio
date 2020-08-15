@@ -29,12 +29,12 @@
         </thead>
         <tbody>
         <tr th:each="refugio : ${refugios}">
-            <td th:text="${refugio.nombre}"></td>
-            <td th:text="${refugio.facebook}"></td>
+            <td class="text-wrap" th:text="${refugio.nombre}"></td>
+            <td><a class="text-wrap" th:href="${refugio.facebook}" target="_blank">Ver Facebook</a></td>
             <td th:text="${refugio.telefono}"></td>
             <td th:text="${refugio.nombreLocalidad}"></td>
             <td th:text="${refugio.nombrePartido}"></td>
-            <td th:text="${refugio.comentario}"></td>
+            <td class="text-wrap" th:text="${refugio.comentario}"></td>
         </tr>
         </tbody>
     </table>

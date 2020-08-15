@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="nombre">Nombre*</label>
-                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true"/>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true" maxlength="50"/>
                 </div>
 
                 <div class="form-row">
@@ -102,13 +102,13 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label for="facebook">Facebook</label>
-                            <input type="text" class="form-control" id="facebook" th:field="*{facebook}"/>
+                            <input type="text" class="form-control" id="facebook" th:field="*{facebook}" maxlength="50"
+                            placeholder="¿Como te buscamos en facebook?"/>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="mail">Mail*</label>
-                        <input type="email" placeholder="Mail..." id="mail" class="form-control" th:field="*{mail}"
-                               required="true"/>
+                        <label for="mail">Mail</label>
+                        <input type="email" placeholder="mail@dominio.com" id="mail" class="form-control" th:field="*{mail}"/>
                     </div>
                 </div>
                 <hr>

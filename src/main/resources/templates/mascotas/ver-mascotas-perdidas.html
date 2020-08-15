@@ -12,11 +12,11 @@
 
     <div class="container">
         <div th:if="${#lists.isEmpty(mascotas)}">
-            <h5><i> No se encontraron resultados que coincidan con los criterios de la búsqueda</i></h5>
+            <h5 class="alert alert-danger"><i> No se encontraron resultados que coincidan con los criterios de la búsqueda</i></h5>
         </div>
-        <h4><i>Se encontraron <span th:text="${#lists.size(mascotas)}"></span> resultados</i></h4>
+        <h4 class="alert alert-light"><i>Se encontraron <span th:text="${#lists.size(mascotas)}"></span> resultados</i></h4>
         <br>
-        <div class="row">
+        <div class="row justify-content-md-center">
            <div class="card col-12 col-md-3 m-2" style="width: 18rem;" th:each="mascota, status : ${mascotas}" th:if="${mascota.continuaPerdido == 'S'}">
 
                 <img class="card-img-top img-fluid rounded" th:src="@{'https://storage.cloud.google.com/primeroproyecto-65f07.appspot.com/' + ${mascota.urlImg}}" alt="Card image cap">
@@ -60,7 +60,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel" th:text="${mascota.nombre}"></h5>
+                                    <h5 class="modal-title text-uppercase" id="exampleModalLabel" th:text="${mascota.nombre}"></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -68,7 +68,7 @@
                                 <div class="modal-body">
                                     <img class="card-img-top img-fluid rounded" th:src="@{'https://storage.cloud.google.com/primeroproyecto-65f07.appspot.com/' + ${mascota.urlImg}}" alt="Card image cap">
                                     <div class="card-body">
-                                        <p class="card-text">
+                                        <p class="card-text text-wrap">
                                             <b>Mascota: </b><span th:text="${mascota.nombreTipoMascota}"></span><br>
                                             <b>Desaparición: </b><span th:text="${mascota.fechaDesaparicion}"></span><br>
                                             <b>Color1: </b><span th:text="${mascota.nombreColor1}"></span><br>

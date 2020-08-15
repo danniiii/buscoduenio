@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="nombre">Nombre*</label>
-            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true">
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true" maxlength="100">
         </div>
 
         <div class="form-row">
@@ -44,7 +44,9 @@
             <div class="form-group col-md-4">
                 <div class="form-group">
                     <label for="facebook">Facebook</label>
-                    <input type="text" class="form-control" id="facebook" th:field="*{facebook}">
+                    <input type="url" class="form-control" id="facebook" th:field="*{facebook}" maxlength="200"
+                           placeholder="https://facebook.com/MiRefugio"
+                           pattern="https://.*"/>
                 </div>
             </div>
             <div class="form-group col-md-4">
