@@ -26,11 +26,7 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("")
 public class MascotaController {
 
-    private static final int CANTIDAD_ELEMENTOS_POR_PAGINA = 9;
-
     private MascotaRepository mascotaRepository;
-
-    @Autowired
     private PartidoRepository partidoRepository;
     private LocalidadRepository localidadRepository;
     private ColorRepository colorRepository;
@@ -323,13 +319,13 @@ public class MascotaController {
     }
 
     @PostMapping("/editar-mascota/{id_mascota}")
-    public ModelAndView mostrarFormularioEditarMascota(@PathVariable("id_mascota") Integer idMascota,
+    public String editarMascota(@PathVariable("id_mascota") Integer idMascota,
             @ModelAttribute MascotaDto mascotaDto){
 
         Optional<MascotaEntity> maybeMascotaEntity = mascotaRepository.findById(idMascota);
 
         if(!maybeMascotaEntity.isPresent()){
-            return new ModelAndView("error");
+            return "redirect:/error";
         }
 
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
@@ -375,34 +371,32 @@ public class MascotaController {
 
         mascotaRepository.save(mascotaEntity);
 
-        return new ModelAndView("mascotas/ver-mascota-perdida");
+        return "redirect:/ver-mascotas";
 
     }
 
     @PostMapping("/eliminar-mascota/{id_mascota}")
-    public ModelAndView eliminarMascota(@PathVariable("id_mascota") Integer idMascota,
+    public String eliminarMascota(@PathVariable("id_mascota") Integer idMascota,
                                                        @ModelAttribute ("codigo-elimina") String codigo){
 
         Optional<MascotaEntity> maybeMascotaEntity =  mascotaRepository.findById(idMascota);
 
         if(!maybeMascotaEntity.isPresent()){
 
-            return new ModelAndView("error");
+            return "redirect:/error";
         }
 
         MascotaEntity mascotaEntity = maybeMascotaEntity.get();
 
 
         if(!codigo.equals(mascotaEntity.getToken())){
-            ModelAndView mav =  new ModelAndView("error");
-            mav.addObject("mensaje", "el código ingresado es incorrecto");
-            return mav;
+            return "redirect:error/el código ingresado es incorrecto";
         }
 
         mascotaEntity.setContinuaPerdido("N");
         mascotaRepository.save(mascotaEntity);
 
-        return new ModelAndView("mascotas/ver-mascotas-perdidas");
+        return "redirect:/ver-mascotas";
 
     }
 
@@ -410,6 +404,13 @@ public class MascotaController {
     public ModelAndView preguntasFrecuentes(){
 
         ModelAndView modelAndView = new ModelAndView("preguntas-frecuentes");
+        return modelAndView;
+    }
+
+    @GetMapping({"/error/{msj}","/error"})
+    public ModelAndView devolverError(@ModelAttribute("mensaje") String mensaje){
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject(mensaje);
         return modelAndView;
     }
 }
