@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="form-group">
-                    <label for="facebook">Facebook</label>
+                    <label for="facebook">Facebook (URL)</label>
                     <input type="url" class="form-control" id="facebook" th:field="*{facebook}" maxlength="200"
                            placeholder="https://facebook.com/MiRefugio"
                            pattern="https://.*"/>
@@ -63,6 +63,8 @@
         <button type="submit" class="btn btn-primary btn-lg" id="enviar">Enviar</button>
     </form>
     <!-- /FORMULARIO DE BUSQUEDA DE MASCOTAS-->
+    <br>
+    <p>* campos obligatorios</p>
 </div>
 
 <div th:insert="fragments/default :: footer"></div>

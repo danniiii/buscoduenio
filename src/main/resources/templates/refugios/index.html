@@ -30,7 +30,8 @@
         <tbody>
         <tr th:each="refugio : ${refugios}">
             <td class="text-wrap" th:text="${refugio.nombre}"></td>
-            <td><a class="text-wrap" th:href="${refugio.facebook}" target="_blank">Ver Facebook</a></td>
+            <td><a class="text-wrap" th:href="${#strings.isEmpty(refugio.facebook)}?'':${refugio.facebook}"
+                   th:text="${#strings.isEmpty(refugio.facebook)}?'':'Ver Facebook'" target="_blank"></a></td>
             <td th:text="${refugio.telefono}"></td>
             <td th:text="${refugio.nombreLocalidad}"></td>
             <td th:text="${refugio.nombrePartido}"></td>
