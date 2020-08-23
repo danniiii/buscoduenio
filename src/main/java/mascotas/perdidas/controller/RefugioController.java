@@ -83,6 +83,7 @@ public class RefugioController {
         refugioEntity.setComentario(refugioDto.getComentario());
         refugioEntity.setTelefono(refugioDto.getTelefono());
         refugioEntity.setFacebook(refugioDto.getFacebook());
+        refugioEntity.setInstagram(refugioDto.getInstagram());
         refugioEntity.setMail(refugioDto.getMail());
 
         refugioRepository.save(refugioEntity);

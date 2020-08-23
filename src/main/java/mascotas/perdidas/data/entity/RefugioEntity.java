@@ -46,4 +46,7 @@ public class RefugioEntity {
 
     @Column(name = "comentario")
     private String comentario;
+
+    @Column(name = "instagram")
+    private String instagram;
 }

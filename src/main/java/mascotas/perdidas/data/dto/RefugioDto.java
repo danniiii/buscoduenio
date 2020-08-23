@@ -27,4 +27,7 @@ public class RefugioDto {
     private String mail;
 
     private String comentario;
+
+    private String instagram;
+
 }
