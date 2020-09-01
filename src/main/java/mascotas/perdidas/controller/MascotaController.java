@@ -4,7 +4,10 @@ import mascotas.perdidas.data.dto.MascotaDto;
 import mascotas.perdidas.data.entity.*;
 import mascotas.perdidas.data.repository.*;
 import mascotas.perdidas.service.FirebaseInitializer;
+import mascotas.perdidas.service.MascotaService;
+import mascotas.perdidas.service.ObtenerMascotasDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,13 +36,14 @@ public class MascotaController {
     private TipoMascotaRepository tipoMascotaRepository;
     private RazaRepository razaRepository;
 
+    @Autowired
+    private ObtenerMascotasDtoService obtenerMascotasDtoService;
 
     @Autowired
-    FirebaseInitializer firebaseInitializer;
+    @Qualifier("subirMascotaService")
+    private MascotaService mascotaService;
 
 
-
-    @Autowired
     public MascotaController(MascotaRepository mascotaRepository, PartidoRepository partidoRepository,
                              LocalidadRepository localidadRepository, ColorRepository colorRepository,
                              TipoMascotaRepository tipoMascotaRepository, RazaRepository razaRepository){
@@ -77,36 +81,9 @@ public class MascotaController {
         data.put("raza", mascotaDto.getRaza());
         List<MascotaEntity> mascotaEntity = mascotaRepository.getData(data);
 
-        List<MascotaDto> mascotaDtoSalida = new ArrayList<MascotaDto>();
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-       for (MascotaEntity entity : mascotaEntity) {
+         obtenerMascotasDtoService.getMascotas(mascotaEntity);
 
-           if (entity.getContinuaPerdido().equals("S")) {
-
-              MascotaDto newMascotaDto = new MascotaDto();
-              newMascotaDto.setNombre(entity.getNombre());
-              newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
-              newMascotaDto.setNombreColor1(entity.getNombreColor1());
-              newMascotaDto.setNombreColor2(entity.getNombreColor2());
-              newMascotaDto.setNombreRaza(entity.getNombreRaza());
-              newMascotaDto.setNombrePartido(entity.getNombrePartido());
-              newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
-              newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
-              newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
-              newMascotaDto.setComentario(entity.getComentario());
-              newMascotaDto.setTelefono(entity.getTel());
-              newMascotaDto.setMail(entity.getEmail());
-              newMascotaDto.setFacebook(entity.getFace());
-              newMascotaDto.setUrlImg(entity.getUrlImagen());
-              newMascotaDto.setId(entity.getId());
-              newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
-              newMascotaDto.setGenero(entity.getGenero());
-
-              mascotaDtoSalida.add(newMascotaDto);
-          }
-       }
-
-        modelAndView.addObject("mascotas", mascotaDtoSalida);
+       modelAndView.addObject("mascotas", obtenerMascotasDtoService.getMascotas(mascotaEntity));
        modelAndView.addObject("codigo", "");
        return modelAndView;
 
@@ -118,36 +95,8 @@ public class MascotaController {
 
         List<MascotaEntity> mascotaEntity = mascotaRepository.findAll();
 
-        List<MascotaDto> mascotaDtoSalida = new ArrayList<MascotaDto>();
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        for (MascotaEntity entity : mascotaEntity) {
 
-            if (entity.getContinuaPerdido().equals("S")) {
-                MascotaDto newMascotaDto = new MascotaDto();
-
-                newMascotaDto.setNombre(entity.getNombre());
-                newMascotaDto.setFechaDesaparicion(formatoDelTexto.format(entity.getFechaDesaparicion()));
-                newMascotaDto.setNombreColor1(entity.getNombreColor1());
-                newMascotaDto.setNombreColor2(entity.getNombreColor2());
-                newMascotaDto.setNombreRaza(entity.getNombreRaza());
-                newMascotaDto.setNombrePartido(entity.getNombrePartido());
-                newMascotaDto.setNombreLocalidad(entity.getNombreLocalidad());
-                newMascotaDto.setNombreTipoMascota(entity.getNombreTipoMascota());
-                newMascotaDto.setTamanioMascota(entity.getTamanioMascota());
-                newMascotaDto.setComentario(entity.getComentario());
-                newMascotaDto.setTelefono(entity.getTel());
-                newMascotaDto.setMail(entity.getEmail());
-                newMascotaDto.setFacebook(entity.getFace());
-                newMascotaDto.setUrlImg(entity.getUrlImagen());
-                newMascotaDto.setId(entity.getId());
-                newMascotaDto.setContinuaPerdido(entity.getContinuaPerdido());
-                newMascotaDto.setGenero(entity.getGenero());
-
-                mascotaDtoSalida.add(newMascotaDto);
-            }
-        }
-
-        modelAndView.addObject("mascotas", mascotaDtoSalida);
+        modelAndView.addObject("mascotas", obtenerMascotasDtoService.getMascotas(mascotaEntity));
         modelAndView.addObject("codigo", "");
         return modelAndView;
     }
@@ -178,74 +127,12 @@ public class MascotaController {
         }
         MascotaEntity mascotaEntity = new MascotaEntity();
 
-        if (mascotaDto.getNombre()!=null)
-            mascotaEntity.setNombre(mascotaDto.getNombre());
-
-        if (mascotaDto.getFechaDesaparicion()!=null){
-            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-            mascotaEntity.setFechaDesaparicion(formatoDelTexto.parse(mascotaDto.getFechaDesaparicion()));
-            fileName += LocalDateTime.now().getYear() + LocalDateTime.now().getMonth().toString() + LocalDateTime.now().getDayOfMonth();
-        }
-
-        if (mascotaDto.getIdTipoMascota()!=null){
-            mascotaEntity.setIdTipoMascota(mascotaDto.getIdTipoMascota());
-            Optional<TipoMascotaEntity> maybeTipoMascotaEntity = tipoMascotaRepository.findById(mascotaDto.getIdTipoMascota());
-            TipoMascotaEntity tipoMascotaEntity = maybeTipoMascotaEntity.get();
-            mascotaEntity.setNombreTipoMascota(tipoMascotaEntity.getNombre());
-        }
-
-        if (mascotaDto.getIdColor1()!=null){
-            mascotaEntity.setColor1(mascotaDto.getIdColor1());
-            Optional<ColorEntity> maybeColorEntity1 = colorRepository.findById(mascotaDto.getIdColor1());
-            ColorEntity colorEntity1 = maybeColorEntity1.get();
-            mascotaEntity.setNombreColor1(colorEntity1.getNombre());
-        }
-
-        if (mascotaDto.getColor2()!=null){
-            mascotaEntity.setColor2(mascotaDto.getColor2());
-            Optional<ColorEntity> maybeColorEntity2 = colorRepository.findById(mascotaDto.getColor2());
-            ColorEntity colorEntity2 = maybeColorEntity2.get();
-            mascotaEntity.setNombreColor2(colorEntity2.getNombre());
-        }
-
-        if (mascotaDto.getTamanioMascota()!=null)
-            mascotaEntity.setTamanioMascota(mascotaDto.getTamanioMascota());
-
-        if (mascotaDto.getRaza()!=null){
-            mascotaEntity.setRaza(mascotaDto.getRaza());
-            Optional<RazaEntity> maybeRazaEntity = razaRepository.findById(mascotaDto.getRaza());
-            RazaEntity razaEntity = maybeRazaEntity.get();
-            mascotaEntity.setNombreRaza(razaEntity.getNombre());
-        }
-
-        if (mascotaDto.getPartido()!=null){
-            mascotaEntity.setPartido(mascotaDto.getPartido());
-            Optional<PartidoEntity> maybePartidoEntity = partidoRepository.findById(mascotaDto.getPartido());
-            PartidoEntity partidoEntity = maybePartidoEntity.get();
-            mascotaEntity.setNombrePartido(partidoEntity.getNombre());
-        }
-
-        if (mascotaDto.getLocalidad()!=null){
-            mascotaEntity.setLocalidad(mascotaDto.getLocalidad());
-            Optional<LocalidadEntity> maybeLocalidadEntity = localidadRepository.findById(mascotaDto.getLocalidad());
-            LocalidadEntity localidadEntity = maybeLocalidadEntity.get();
-            mascotaEntity.setNombreLocalidad(localidadEntity.getNombre());
-        }
-
-        mascotaEntity.setComentario(mascotaDto.getComentario());
-        mascotaEntity.setContinuaPerdido("S");
-        mascotaEntity.setTel(mascotaDto.getTelefono());
-        mascotaEntity.setFace(mascotaDto.getFacebook());
-        mascotaEntity.setEmail(mascotaDto.getMail());
-        mascotaEntity.setToken(generarToken());
-        mascotaEntity.setGenero(mascotaDto.getGenero());
-
-        mascotaEntity.setUrlImagen(firebaseInitializer.uploadFile(file));
-
-        mascotaRepository.save(mascotaEntity);
-
         ModelAndView modelAndView = new ModelAndView("mascotas/mascota-subida");
-        modelAndView.addObject("codigo", mascotaEntity.getToken());
+
+        if( mascotaService.validarYConvertirMascotaDtoAMascotaEntity(mascotaEntity, mascotaDto, file))
+            modelAndView.addObject("codigo", mascotaEntity.getToken());
+        else
+            return new ModelAndView("error");
 
         return modelAndView;
     }
@@ -257,29 +144,6 @@ public class MascotaController {
         return modelAndView;
     }
 
-    private String generarToken(){
-        // Los caracteres de interés en un array de char.
-        char [] chars = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
-
-        // Longitud del array de char.
-        int charsLength = chars.length;
-
-        // Instanciamos la clase Random
-        Random random = new Random();
-
-        // Un StringBuffer para componer la cadena aleatoria de forma eficiente
-
-        StringBuffer buffer = new StringBuffer();
-
-        // Bucle para elegir una cadena de 10 caracteres al azar
-        for (int i=0;i<10;i++){
-
-            // Añadimos al buffer un caracter al azar del array
-            buffer.append(chars[random.nextInt(charsLength)]);
-        }
-
-        return buffer.toString();
-    }
 
     @GetMapping("/editar-mascota/{id_mascota}")
     public ModelAndView mostrarFormularioEditarMascota(@PathVariable("id_mascota") Integer idMascota,
