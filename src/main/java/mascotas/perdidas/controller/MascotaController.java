@@ -70,7 +70,7 @@ public class MascotaController {
     }
 
    @PostMapping("/ver-mascotas")
-   public ModelAndView buscarMascotasPerdidas( @ModelAttribute MascotaDto mascotaDto){
+   public ModelAndView buscarMascotasPerdidas(@ModelAttribute("mascotaDto") MascotaDto mascotaDto){
         ModelAndView modelAndView = new ModelAndView("mascotas/ver-mascotas-perdidas");
         Map<String, Integer> data = new HashMap<String, Integer>();
         data.put("partido", mascotaDto.getPartido());
@@ -80,8 +80,6 @@ public class MascotaController {
         data.put("idTipoMascota", mascotaDto.getIdTipoMascota());
         data.put("raza", mascotaDto.getRaza());
         List<MascotaEntity> mascotaEntity = mascotaRepository.getData(data);
-
-         obtenerMascotasDtoService.getMascotas(mascotaEntity);
 
        modelAndView.addObject("mascotas", obtenerMascotasDtoService.getMascotas(mascotaEntity));
        modelAndView.addObject("codigo", "");
